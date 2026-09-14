@@ -1,24 +1,20 @@
-name: Self-Hosted Runner test
+name: Self-Hosted Runner Test
 
 on:
   workflow_dispatch:
 
-  jobs:
-     run-on-my-machine:
-     runs-on: [self-hosted,my-linux-runner]
-     steps:
-       - name: print Hostname and Directory
-       run:
-         echo "Hostname: $(hostname)"
-         echo "Working Directory: $(pwd)"
+jobs:
+  test:
+    runs-on: ubuntu-latest
 
-         - name: create a Test file
-         run: |
-          echo "Hello from Github actions on my local machine!" > test-output.txt
-          echo "files created successfully."
+    steps:
+      - name: Show OS
+        run: uname -a
 
-          - name: Verify File Exists
-          run: |
-          cat test-output.txt
+      - name: Show hostname
+        run: hostname
+
+      - name: Show current user
+        run: whoami
          
          
