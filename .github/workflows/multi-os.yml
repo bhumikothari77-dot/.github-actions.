@@ -1,0 +1,35 @@
+name: Multi-OS Runner and Environment Demo
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print System Info (Ubuntu)
+        run: |
+          echo "OS Name: $(uname -a)"
+          echo "Hostname: $(hostname)"
+          echo "Current User: $(whoami)"
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Print System Info (Windows)
+        shell: pwsh
+        run: |
+          Write-Output "OS Name: $env:OS"
+          Write-Output "Hostname: $env:COMPUTERNAME"
+          Write-Output "Current User: $env:USERNAME"
+
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - name: Print System Info (macOS)
+        run: |
+          echo "OS Name: $(sw_vers -productName) $(sw_vers -productVersion)"
+          echo "Hostname: $(hostname)"
+          echo "Current User: $(whoami)"
